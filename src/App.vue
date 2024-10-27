@@ -1,5 +1,9 @@
 <script setup lang="ts">
 const str = 'hello world'
+
+const a = "hhh";
+
+const b = "ssss";
 </script>
 
 <template>

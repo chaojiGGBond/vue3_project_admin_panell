@@ -1,24 +1,15 @@
-<script setup lang="ts">
-const str = 'hello world'
-
-const a = 'hhh'
-
-const b = 'ssss'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div class="box">
-    <p>{{ str }}</p>
+  <div>
+    <h3>hhh</h3>
   </div>
 </template>
 
 <style scoped lang="scss">
-.box {
-  background: #999;
-  width: 20%;
-  height: 20%;
-  p {
-    color: linen;
+div {
+  h3 {
+    color: $base-color;
   }
 }
 </style>

@@ -10,6 +10,10 @@ import 'virtual:svg-icons-register'
 import globalComponent from './components/index.ts'
 //导入全局样式
 import './styles/index.scss'
+//导入router
+import router from './router'
+//导入pinia
+import pinia from './store'
 //获取实例对象
 const app = createApp(App)
 //安装element-plus
@@ -17,6 +21,10 @@ const app = createApp(App)
 app.use(ElementPlus, {
   locale: zhCn,
 })
+//将路由器插件安装到应用实例上
+app.use(router)
+//注册 Pinia 状态管理库
+app.use(pinia)
 //使用自定义插件
 app.use(globalComponent)
 //将实例挂载到挂载点

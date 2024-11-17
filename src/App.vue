@@ -1,9 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>
-    <h3>hhh</h3>
-  </div>
+ <router-view></router-view>
 </template>
 
 <style scoped lang="scss">

@@ -1,1 +1,18 @@
 @import "./reset.scss";
+/* 滚动条整体样式 */
+::-webkit-scrollbar {
+  width: 12px; /* 滑块宽度 */
+  height: 12px; /* 滑块高度 */
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1; /* 滑块颜色 */
+  min-height: 100px;
+}
+
+/* 滑块悬停样式 */
+::-webkit-scrollbar-thumb:hover {
+  background: #777777; /* 悬停颜色 */
+}
+

@@ -1,2 +1,20 @@
 //为scss提供全局变量
-$base-color: skyblue;
+//首页侧边栏宽度
+$layout-sidebar-width: 24%;
+//首页导航栏长度
+$layout-navbar-height: 9%;
+//首页侧边栏颜色
+$layout-sidebar-background-color: rgb(240, 238, 229);
+//首页导航栏颜色
+$layout-navbar-background-color: rgb(193, 95, 61);
+//首页内容区颜色
+$layout-content-background-color: rgb(245, 244, 239);
+//首页侧边栏图标长度
+$layout-sidebar-logo-height: 50px;
+//首页侧边栏图标文字大小
+$layout-sidebar-logo-title-size: 30px;
+//首页侧边栏折叠后侧边剩余宽度
+$layout-sidebar-fold-width: 50px;
+//字体
+$title-font-style: 'Times New Roman', Times, serif;
+$content-font-style: 'Lucida Console', monospace;

@@ -1,5 +1,6 @@
 import SvgIcon from './Svgicon/index.vue'
 const allGlobalComponents = { SvgIcon }
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 export default {
   //当在main.ts里使用app.use(globalComponent)时，会自动调用对应ts代码里的install方法
   install(app) {
@@ -7,5 +8,8 @@ export default {
     Object.keys(allGlobalComponents).forEach((componentName) => {
       app.component(componentName, allGlobalComponents[componentName])
     })
+    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+      app.component(key, component)
+    }
   },
 }

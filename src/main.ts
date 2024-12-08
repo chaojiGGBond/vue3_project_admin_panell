@@ -15,6 +15,7 @@ import router from './router'
 //导入pinia
 import pinia from './store'
 //获取实例对象
+import './permission.ts'
 const app = createApp(App)
 //安装element-plus
 //国际化配置

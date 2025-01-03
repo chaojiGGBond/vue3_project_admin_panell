@@ -11,7 +11,7 @@ let request = axios.create({
 //配置请求拦截器
 request.interceptors.request.use((config) => {
   let userStore = useUserStore()
-  if(userStore.token){
+  if (userStore.token) {
     config.headers.token = userStore.token
   }
   return config
@@ -23,7 +23,7 @@ request.interceptors.response.use(
   },
   (error) => {
     let message = ''
-    let status = error.response.status
+    let status = error.response.code
     switch (status) {
       case 401:
         message = 'token过期'

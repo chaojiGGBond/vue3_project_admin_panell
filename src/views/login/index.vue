@@ -2,46 +2,42 @@
 import { User, Lock } from '@element-plus/icons-vue'
 import { reactive, ref } from 'vue'
 import useUserStore from '@/store/modules/user.ts'
-import { useRouter,useRoute } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { ElNotification } from 'element-plus'
-import {getTime} from '@/utils/time.ts'
+import { getTime } from '@/utils/time.ts'
 import { rules } from 'eslint-plugin-vue'
-const route = useRoute();
+const route = useRoute()
 let $router = useRouter()
 const userStore = useUserStore()
 const loginForm = reactive({ username: 'admin', password: '111111' })
 let loading = ref(false)
-const validatorUsername = (rule: any, value: any, callback: any)=>{
+const validatorUsername = (rule: any, value: any, callback: any) => {
   //rule为验证对象
   //value为文本信息
   //callback是错误返回
-  if(!value){
+  if (!value) {
     return callback(new Error(`Input can't be blank`))
-  }
-  else if(!/^[a-zA-Z0-9]{5,10}$/.test(value)){
+  } else if (!/^[a-zA-Z0-9]{5,10}$/.test(value)) {
     return callback(new Error(`Length should be 5 to 10`))
-  }
-  else callback() //验证通过
+  } else callback() //验证通过
 }
-const validatePassword = (rule: any, value: any, callback: any)=>{
-  if(!value){
+const validatePassword = (rule: any, value: any, callback: any) => {
+  if (!value) {
     return callback(new Error(`Input can't be blank`))
-  }
-  else if(!/^[a-zA-Z0-9]{6,12}$/.test(value)){
+  } else if (!/^[a-zA-Z0-9]{6,12}$/.test(value)) {
     return callback(new Error(`Length should be 6 to 12`))
-  }
-  else callback()
+  } else callback()
 }
-let rules = ({
+let rules = {
   username: [
     // { required: true, min: 5, max: 10, message: 'Length should be 5 to 10', trigger: 'blur' }
-    {trigger: 'change', validator: validatorUsername},
+    { trigger: 'change', validator: validatorUsername },
   ],
   password: [
     // { required: true, min: 6, max: 12, message: 'Length should be 6 to 12', trigger: 'change' }
-    {trigger: 'change', validator: validatePassword},
+    { trigger: 'change', validator: validatePassword },
   ],
-})
+}
 let loginFormRef = ref()
 const login = async () => {
   //validate是一个函数，需要调用
@@ -49,18 +45,18 @@ const login = async () => {
   loading.value = true
   try {
     await userStore.userLogin(loginForm)
-    const redirectPath = route.query.redirect;
-    await $router.push({ path: redirectPath ? redirectPath : '/' });
+    const redirectPath = route.query.redirect
+    await $router.push({ path: redirectPath ? redirectPath : '/' })
     ElNotification({
       type: 'success',
       message: 'login successfully',
-      title: `Hi, Good ${getTime()}`
+      title: `Hi, Good ${getTime()}`,
     })
     loading.value = false
   } catch (error) {
     ElNotification({
       type: 'error',
-      message: 'login failed',
+      message: error.message,
     })
     loading.value = false
   }
@@ -69,11 +65,15 @@ const login = async () => {
 
 <template>
   <div class="login-container">
-    <el-row justify="space-evenly">
-      <el-col :span="12" :xs="0">
-      </el-col>
-      <el-col :span="12" :xs="24">
-        <el-form class="login-form" :model="loginForm" :rules="rules" ref="loginFormRef">
+    <div class="container">
+      <div class="image-section"></div>
+      <div class="form-section">
+        <el-form
+          class="login-form"
+          :model="loginForm"
+          :rules="rules"
+          ref="loginFormRef"
+        >
           <h1>Hello</h1>
           <p>Welcome to the Admin-Panel</p>
           <el-form-item prop="username">
@@ -101,8 +101,8 @@ const login = async () => {
             </el-button>
           </el-form-item>
         </el-form>
-      </el-col>
-    </el-row>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -110,38 +110,53 @@ const login = async () => {
 .login-container {
   width: 100%;
   height: 100vh;
-  background: rgb(245, 244, 239);
-  background-size: cover;
-  .login-form {
-    position: relative;
+  background: $layout-content-background-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .container {
+    display: flex;
+    background: $layout-sidebar-background-color;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 800px;
     width: 70%;
-    top: 25vh;
-    background: url('@/assets/images/background1.png') no-repeat;
-    background-size: cover;
-    padding: 36px;
-    border-radius: 15px; /* 圆角 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影 */
-    opacity: 1; /* 透明度 */
-    h1 {
-      color: black;
-      font-size: 36px;
-      font-family: $title-font-style;
+    height: 500px;
+    .image-section {
+      background: url('@/assets/images/background1.png') no-repeat center center;
+      background-size: cover;
+      width: 50%;
     }
-    p {
-      color: black;
-      font-size: 24px;
-      margin: 20px 0;
-      font-family: $content-font-style;
-    }
-    .login-button {
-      width: 100%;
-      font-family:$content-font-style;
-      font-size: 16px;
-      background-color: rgb(193, 95, 61);
-      border: 1px solid rgb(193, 95, 61);
-    }
-    .login-button:hover {
-      background-color: rgb(198, 108, 76);
+    .form-section {
+      padding: 40px;
+      width: 50%;
+      .login-form {
+        h1 {
+          color: black;
+          font-size: 48px;
+          font-family: $title-font-style;
+          padding-bottom: 16px;
+        }
+        p {
+          color: black;
+          font-size: 24px;
+          margin: 20px 0;
+          font-family: $content-font-style;
+          padding-bottom: 24px;
+        }
+        .login-button {
+          width: 100%;
+          font-family: $content-font-style;
+          font-size: 16px;
+          background-color: rgb(193, 95, 61);
+          border: 1px solid rgb(193, 95, 61);
+          margin-top: 24px;
+        }
+        .login-button:hover {
+          background-color: rgb(198, 108, 76);
+        }
+      }
     }
   }
 }

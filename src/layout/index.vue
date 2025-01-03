@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {useRoute} from 'vue-router'
+import { useRoute } from 'vue-router'
 import Logo from './logo/index.vue'
 import Menu from './menu/index.vue'
 import Main from './main/index.vue'
@@ -18,38 +18,48 @@ export default {
 <template>
   <div class="layout-container">
     <!--    侧边栏-->
-    <div class="layout-sidebar" >
+    <div class="layout-sidebar">
       <Logo></Logo>
       <el-scrollbar class="scrollbar">
-        <el-menu :collapse="layoutSettingStore.fold?true:false" :default-active="$route.path" background-color="rgb(240, 238, 229)">
+        <el-menu
+          :collapse="layoutSettingStore.fold ? true : false"
+          :default-active="$route.path"
+          background-color="rgb(240, 238, 229)"
+        >
           <Menu :menuList="userStore.menuRoutes"></Menu>
         </el-menu>
       </el-scrollbar>
     </div>
     <!--    导航栏-->
-    <div class="layout-navbar" :class="{fold:layoutSettingStore.fold?true:false}">
-      <Navbar/>
+    <div
+      class="layout-navbar"
+      :class="{ fold: layoutSettingStore.fold ? true : false }"
+    >
+      <Navbar />
     </div>
     <!--    内容区-->
-    <div class="layout-content" :class="{fold:layoutSettingStore.fold?true:false}">
+    <div
+      class="layout-content"
+      :class="{ fold: layoutSettingStore.fold ? true : false }"
+    >
       <Main />
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.layout-container{
+.layout-container {
   width: 100%;
   height: 100vh;
   .layout-sidebar {
     width: $layout-sidebar-width;
     height: 100vh;
     background-color: $layout-sidebar-background-color;
-    transition: all .3s;
-    .scrollbar{
+    transition: all 0.3s;
+    .scrollbar {
       width: 100%;
       height: calc(100vh - $layout-sidebar-logo-height);
-      .el-menu{
+      .el-menu {
         border-right: none;
       }
     }
@@ -61,8 +71,8 @@ export default {
     top: 0;
     left: $layout-sidebar-width;
     background-color: $layout-navbar-background-color;
-    transition: all .3s;
-    &.fold{
+    transition: all 0.3s;
+    &.fold {
       width: calc(100vw - $layout-sidebar-fold-width);
       left: $layout-sidebar-fold-width;
     }
@@ -76,12 +86,11 @@ export default {
     background-color: $layout-content-background-color;
     overflow: auto;
     padding: 24px;
-    transition: all .3s;
-    &.fold{
+    transition: all 0.3s;
+    &.fold {
       width: calc(100vw - $layout-sidebar-fold-width);
       left: $layout-sidebar-fold-width;
     }
   }
 }
-
 </style>

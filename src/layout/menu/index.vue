@@ -1,8 +1,8 @@
 <script setup lang="ts">
 defineProps(['menuList'])
-import {useRouter} from 'vue-router'
+import { useRouter } from 'vue-router'
 let $router = useRouter()
-const goRoute = (vc)=>{
+const goRoute = (vc) => {
   $router.push(vc.index)
 }
 </script>
@@ -12,19 +12,27 @@ export default {
 }
 </script>
 <template>
-  <template v-for="(item,index) in menuList " :key="item.path">
+  <template v-for="(item, index) in menuList" :key="item.path">
     <template v-if="!item.children">
-      <el-menu-item @click="goRoute" v-if="!item.meta.hidden" :index="item.path">
+      <el-menu-item
+        @click="goRoute"
+        v-if="!item.meta.hidden"
+        :index="item.path"
+      >
         <el-icon class="menu-icon">
           <component :is="item.meta.icon" />
         </el-icon>
         <template #title>
-          <span class="menu-title">{{item.meta.title}}</span>
+          <span class="menu-title">{{ item.meta.title }}</span>
         </template>
       </el-menu-item>
     </template>
     <template v-if="Array.isArray(item.children) && item.children.length === 1">
-      <el-menu-item @click="goRoute" v-if="!item.children[0].hidden" :index="item.children[0].path">
+      <el-menu-item
+        @click="goRoute"
+        v-if="!item.children[0].hidden"
+        :index="item.children[0].path"
+      >
         <el-icon class="menu-icon">
           <component :is="item.children[0].meta.icon" />
         </el-icon>
@@ -38,8 +46,8 @@ export default {
         <template #title>
           <el-icon class="menu-icon">
             <component :is="item.meta.icon" />
-          </el-icon >
-          <span class="menu-title">{{item.meta.title}}</span>
+          </el-icon>
+          <span class="menu-title">{{ item.meta.title }}</span>
         </template>
         <Menu :menuList="item.children" />
       </el-sub-menu>
@@ -72,5 +80,4 @@ export default {
 //::v-deep .el-popper.is-dark {
 //   color: rgb(240, 238, 229) !important;
 //}
-
 </style>

@@ -1,5 +1,6 @@
 import SvgIcon from './Svgicon/index.vue'
-const allGlobalComponents = { SvgIcon }
+import Category from './Category/index.vue'
+const allGlobalComponents = { SvgIcon,Category }
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 export default {
   //当在main.ts里使用app.use(globalComponent)时，会自动调用对应ts代码里的install方法
